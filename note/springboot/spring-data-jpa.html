@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Data JPA 笔记 | zchzh的博客</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="怎么还有😇">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.8bcee675.css" as="style"><link rel="preload" href="/blog/assets/js/app.794e771c.js" as="script"><link rel="preload" href="/blog/assets/js/2.727ab465.js" as="script"><link rel="preload" href="/blog/assets/js/18.6838d0e5.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.84a71104.js"><link rel="prefetch" href="/blog/assets/js/11.2437671f.js"><link rel="prefetch" href="/blog/assets/js/12.dac71b74.js"><link rel="prefetch" href="/blog/assets/js/13.312beebe.js"><link rel="prefetch" href="/blog/assets/js/14.cea99128.js"><link rel="prefetch" href="/blog/assets/js/15.d063899b.js"><link rel="prefetch" href="/blog/assets/js/16.8000f343.js"><link rel="prefetch" href="/blog/assets/js/17.d648e5a7.js"><link rel="prefetch" href="/blog/assets/js/3.493fd784.js"><link rel="prefetch" href="/blog/assets/js/4.79ee0792.js"><link rel="prefetch" href="/blog/assets/js/5.87a01f06.js"><link rel="prefetch" href="/blog/assets/js/6.f112e345.js"><link rel="prefetch" href="/blog/assets/js/7.bf0b9682.js"><link rel="prefetch" href="/blog/assets/js/8.bc07658c.js"><link rel="prefetch" href="/blog/assets/js/9.421ac9db.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.8bcee675.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">zchzh的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link router-link-active">
+  笔记
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="GitHub" class="dropdown-title"><span class="title">GitHub</span> <span class="arrow down"></span></button> <button type="button" aria-label="GitHub" class="mobile-dropdown-title"><span class="title">GitHub</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/puck-ini" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://puck-ini.github.io/blog/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/note/" class="nav-link router-link-active">
+  笔记
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="GitHub" class="dropdown-title"><span class="title">GitHub</span> <span class="arrow down"></span></button> <button type="button" aria-label="GitHub" class="mobile-dropdown-title"><span class="title">GitHub</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/puck-ini" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://puck-ini.github.io/blog/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java笔记</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>redis笔记</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>springboot</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/note/springboot/spring-data-jpa.html" aria-current="page" class="active sidebar-link">Spring Data JPA 笔记</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#常用注解" class="sidebar-link">常用注解</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#entity" class="sidebar-link">@Entity</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#table" class="sidebar-link">@Table</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#id" class="sidebar-link">@Id</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#column" class="sidebar-link">@Column</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#generatedvalue-strategy-generationtype-identity" class="sidebar-link">@GeneratedValue(strategy  = GenerationType.IDENTITY)</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#version" class="sidebar-link">@Version</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#mappedsuperclass" class="sidebar-link">@MappedSuperclass</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#prepersist" class="sidebar-link">@PrePersist</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#preupdate" class="sidebar-link">@PreUpdate</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#preremove" class="sidebar-link">@PreRemove</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#enumerated" class="sidebar-link">@Enumerated</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#embedded" class="sidebar-link">@Embedded</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#embeddable" class="sidebar-link">@Embeddable</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#embeddedid" class="sidebar-link">@EmbeddedId</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#lock" class="sidebar-link">@Lock</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#norepositorybean" class="sidebar-link">@NoRepositoryBean</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#例子1-实体基类" class="sidebar-link">例子1：实体基类</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#例子2-自定义-repository" class="sidebar-link">例子2：自定义 Repository</a></li><li class="sidebar-sub-header"><a href="/blog/note/springboot/spring-data-jpa.html#例子2-1-扩展-定义公有-service-实现简单的crud" class="sidebar-link">例子2.1（扩展）：定义公有 Service 实现简单的CRUD</a></li></ul></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="spring-data-jpa-笔记"><a href="#spring-data-jpa-笔记" class="header-anchor">#</a> Spring Data JPA 笔记</h1> <h2 id="常用注解"><a href="#常用注解" class="header-anchor">#</a> 常用注解</h2> <h3 id="entity"><a href="#entity" class="header-anchor">#</a> @Entity</h3> <p>标注类为跟数据库表映射的实体</p> <h3 id="table"><a href="#table" class="header-anchor">#</a> @Table</h3> <p>标明映射的数据表名</p> <h3 id="id"><a href="#id" class="header-anchor">#</a> @Id</h3> <p>标识主键</p> <h3 id="column"><a href="#column" class="header-anchor">#</a> @Column</h3> <p>数据库表字段属性信息</p> <h3 id="generatedvalue-strategy-generationtype-identity"><a href="#generatedvalue-strategy-generationtype-identity" class="header-anchor">#</a> @GeneratedValue(strategy  = GenerationType.IDENTITY)</h3> <p>自增属性有自增类型会将属性定义为该类型，没有的话会创建序列进行关联自增</p> <h3 id="version"><a href="#version" class="header-anchor">#</a> @Version</h3> <p>该注解标注的属性会作为乐观锁在 save() 方法更新时进行判断，版本不同会更新失败</p> <h3 id="mappedsuperclass"><a href="#mappedsuperclass" class="header-anchor">#</a> @MappedSuperclass</h3> <p>标识映射的超类，可以将表共有的属性放在该注解标识的类中，然后让其他实体类去继承该类</p> <h3 id="prepersist"><a href="#prepersist" class="header-anchor">#</a> @PrePersist</h3> <p>用在方法上，在实体保存到数据库之前可以执行的操作，例如实现 createTime 属性的自动添加</p> <h3 id="preupdate"><a href="#preupdate" class="header-anchor">#</a> @PreUpdate</h3> <p>用在方法上，在实体更新到数据库之前可以执行的操作，例如实现 updateTime 属性的自动更新</p> <h3 id="preremove"><a href="#preremove" class="header-anchor">#</a> @PreRemove</h3> <p>用在方法上，在实体从数据库删除之前可以执行的操作</p> <h3 id="enumerated"><a href="#enumerated" class="header-anchor">#</a> @Enumerated</h3> <p>用在属性上，可以将枚举当作实体的属性，注解可以设置值，EnumType.ORDINAL 表示使用枚举默认的下标作为值保存在数据库中，EnumType.STRING 表示用枚举名字的字符串作为值保存在数据库中</p> <h3 id="embedded"><a href="#embedded" class="header-anchor">#</a> @Embedded</h3> <p>嵌入型属性，可以用于@Entity  标注的类中的属性上，当作嵌入型属性</p> <h3 id="embeddable"><a href="#embeddable" class="header-anchor">#</a> @Embeddable</h3> <p>嵌入型类，用在嵌入型类上</p> <p>@Embedded  和 @Embeddable  只用一个就能生效，两个都用也没区别</p> <h3 id="embeddedid"><a href="#embeddedid" class="header-anchor">#</a> @EmbeddedId</h3> <p>组合主键，可以在多对多关系表中使用，需要与@Embeddable 配合使用</p> <h3 id="lock"><a href="#lock" class="header-anchor">#</a> @Lock</h3> <p>该注解用在方法上，有很多种类型的锁，例如 @Lock(LockModeType.PESSIMISTIC_WRITE) 用在 findByName(String pname) 方法上就可以实现一个悲观锁，等价于SQL：select * from table where name = pname for update;</p> <h3 id="norepositorybean"><a href="#norepositorybean" class="header-anchor">#</a> @NoRepositoryBean</h3> <p>用在接口或者类上，表示该接口和类不是一个jpa 中的 repository，作为接口一般继承于 JpaRepository</p> <h3 id="例子1-实体基类"><a href="#例子1-实体基类" class="header-anchor">#</a> 例子1：实体基类</h3> <h4 id="baseentity"><a href="#baseentity" class="header-anchor">#</a> BaseEntity</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@MappedSuperclass
+public class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = &quot;create_time&quot;)
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    @Column(name = &quot;update_time&quot;)
+    private Date updateTime;
+
+    /**
+     * jpa version 乐观锁，解决并发更新的问题
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * 在实体保存到数据库之前执行的操作
+     */
+    @PrePersist
+    public void prePersist(){
+        this.createTime = this.updateTime = new Date();
+    }
+
+    /**
+     * 在实体更新到数据库之前执行的操作
+     */
+    @PreUpdate
+    public void preUpdate(){
+        this.updateTime = new Date();
+    }
+
+    /**
+     * 在实体从数据库删除之前执行的操作
+     */
+    @PreRemove
+    public void preRemove(){
+        this.updateTime = new Date();
+    }
+
+
+    // get and set ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br></div></div><h4 id="userentity"><a href="#userentity" class="header-anchor">#</a> UserEntity</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Entity
+public class UserEntity extends BaseEntity{
+
+    /**
+     * 用户名
+     */
+    private Username username;
+
+    /**
+     * 密码
+     */
+    private Password password;
+    /**
+     * 用户类型，EnumType.STRING 表示使用枚举名字的字符串保存在数据库中
+     */
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    // get and set ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h4 id="roleentity"><a href="#roleentity" class="header-anchor">#</a> RoleEntity</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Entity
+public class RoleEntity extends BaseEntity {
+    /**
+     * 角色名
+     */
+    private String name;
+    /**
+     * 角色描述
+     */
+    private String description;
+    
+    // get and set ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h4 id="userrole"><a href="#userrole" class="header-anchor">#</a> UserRole</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Entity
+public class UserRole {
+    /**
+     * 组合主键
+     */
+    @EmbeddedId
+    private UserRoleId userRoleId;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h4 id="嵌入型属性以及组合主键"><a href="#嵌入型属性以及组合主键" class="header-anchor">#</a> 嵌入型属性以及组合主键</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>/** 
+ * 这里添加了注解之后 UserEntity 使用时就不再需要添加 @Embedded 注解
+ */
+@Embeddable
+public class Username {
+
+    private String username;
+
+    /** 
+     * 嵌入属性必须有无参构造函数，不然会报错
+     */
+    public Username() {}
+
+    public Username(String username) {
+        this.username = username;
+    }
+
+    /** 
+     * 嵌入属性必须有get set 方法，不然 jpa save() 方法返回的值会没数据
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+}
+
+@Embeddable
+public class Password {
+
+    private String password;
+
+    public Password() {}
+
+    public Password(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+
+@Embeddable
+public class UserRoleId implements Serializable {
+    /**
+     * 用户id
+     */
+    private Long userId;
+    /**
+     * 角色id
+     */
+    private Long roleId;
+    
+    // get and set ...
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br></div></div><h4 id="枚举"><a href="#枚举" class="header-anchor">#</a> 枚举</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>/**
+ * EnumType.ORDINAL 表示保存枚举的下标从0开始，例如枚举 ADMIN 在 USER 上面，ADMIN 就是保存0 USER 就是1
+ * EnumType.STRING 表示使用枚举名字的字符串保存在数据库中，例如枚举 ADMMIN 在数据库中保存的就是&quot;ADMIN&quot;这个字符串 
+ */
+public enum  UserType {
+    /**
+     * 管理员
+     */
+    ADMIN,
+    /**
+     * 普通用户
+     */
+    USER;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="例子2-自定义-repository"><a href="#例子2-自定义-repository" class="header-anchor">#</a> 例子2：自定义 Repository</h3> <h4 id="baserepo-自定义接口"><a href="#baserepo-自定义接口" class="header-anchor">#</a> BaseRepo 自定义接口</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@NoRepositoryBean
+public interface BaseRepo&lt;ENTITY, ID&gt; extends JpaRepository&lt;ENTITY, ID&gt; {
+
+    /**
+     * 自定义查找
+     * @param ids id 列表
+     * @param sort 排序方式
+     * @return 返回实体列表
+     */
+    List&lt;ENTITY&gt; findAllById(Collection&lt;ID&gt; ids, Sort sort);
+
+    /**
+     * 自定义查找
+     * @param ids id 列表
+     * @param pageable 分页方式
+     * @return 返回实体列表
+     */
+    Page&lt;ENTITY&gt; findAllById(Collection&lt;ID&gt; ids, Pageable pageable);
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h4 id="baserepoimpl-自定义接口实现"><a href="#baserepoimpl-自定义接口实现" class="header-anchor">#</a> BaseRepoImpl 自定义接口实现</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class BaseRepoImpl&lt;ENTITY, ID&gt; extends SimpleJpaRepository&lt;ENTITY, ID&gt; implements BaseRepo&lt;ENTITY, ID&gt; {
+
+    private JpaEntityInformation&lt;ENTITY, ID&gt; entityInformation;
+
+    private EntityManager entityManager;
+
+    public BaseRepoImpl(JpaEntityInformation&lt;ENTITY, ID&gt; entityInformation,
+                        EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.entityInformation = entityInformation;
+        this.entityManager = entityManager;
+    }
+
+    /**
+     * 自定义查找
+     * @param ids id 列表
+     * @param sort 排序方式
+     * @return 返回实体列表
+     */
+    @Override
+    public List&lt;ENTITY&gt; findAllById(Collection&lt;ID&gt; ids, Sort sort) {
+        if (!ids.iterator().hasNext()) {
+            return Collections.emptyList();
+        }
+
+        if (entityInformation.hasCompositeId()) {
+            List&lt;ENTITY&gt; results = new ArrayList&lt;&gt;();
+            ids.forEach(id -&gt; super.findById(id).ifPresent(results::add));
+            return results;
+        }
+
+        ByIdsSpecification&lt;ENTITY&gt; specification = new ByIdsSpecification&lt;&gt;(entityInformation);
+        TypedQuery&lt;ENTITY&gt; query = super.getQuery(specification, sort);
+        return query.setParameter(specification.parameter, ids).getResultList();
+    }
+
+    /**
+     * 自定义查找
+     * @param ids id 列表
+     * @param pageable 分页方式
+     * @return 返回实体列表
+     */
+    @Override
+    public Page&lt;ENTITY&gt; findAllById(Collection&lt;ID&gt; ids, Pageable pageable) {
+        if (!ids.iterator().hasNext()) {
+            return new PageImpl&lt;&gt;(Collections.emptyList());
+        }
+
+        if (entityInformation.hasCompositeId()) {
+            throw new UnsupportedOperationException(&quot;Unsupported find all by composite id with page info&quot;);
+        }
+
+        ByIdsSpecification&lt;ENTITY&gt; specification = new ByIdsSpecification&lt;&gt;(entityInformation);
+        TypedQuery&lt;ENTITY&gt; query = super.getQuery(specification, pageable)
+                .setParameter(specification.parameter, ids);
+        TypedQuery&lt;Long&gt; countQuery = getCountQuery(specification, getDomainClass())
+                .setParameter(specification.parameter, ids);
+
+        return pageable.isUnpaged() ?
+                new PageImpl&lt;&gt;(query.getResultList())
+                : readPage(query, getDomainClass(), pageable, countQuery);
+    }
+    
+
+    protected &lt;S extends ENTITY&gt; Page&lt;S&gt; readPage(TypedQuery&lt;S&gt; query,
+                                                  Class&lt;S&gt; domainClass,
+                                                  Pageable pageable,
+                                                  TypedQuery&lt;Long&gt; countQuery) {
+
+        if (pageable.isPaged()) {
+            query.setFirstResult((int) pageable.getOffset());
+            query.setMaxResults(pageable.getPageSize());
+        }
+
+        return PageableExecutionUtils.getPage(query.getResultList(), pageable,
+                () -&gt; executeCountQuery(countQuery));
+    }
+
+    private static long executeCountQuery(TypedQuery&lt;Long&gt; query) {
+
+        Assert.notNull(query, &quot;TypedQuery must not be null!&quot;);
+
+        List&lt;Long&gt; totals = query.getResultList();
+        long total = 0L;
+
+        for (Long element : totals) {
+            total += element == null ? 0 : element;
+        }
+
+        return total;
+    }
+
+    private static final class ByIdsSpecification&lt;T&gt; implements Specification&lt;T&gt; {
+        private static final long serialVersionUID = 1L;
+        private final JpaEntityInformation&lt;T, ?&gt; entityInformation;
+        @Nullable
+        ParameterExpression&lt;Collection&gt; parameter;
+
+        ByIdsSpecification(JpaEntityInformation&lt;T, ?&gt; entityInformation) {
+            this.entityInformation = entityInformation;
+        }
+
+        @Override
+        public Predicate toPredicate(Root&lt;T&gt; root, CriteriaQuery&lt;?&gt; query, CriteriaBuilder cb) {
+            Path&lt;?&gt; path = root.get(this.entityInformation.getIdAttribute());
+            this.parameter = cb.parameter(Collection.class);
+            return path.in(this.parameter);
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br></div></div><h4 id="在启动类上添加-enablejparepositories-标明使用自定义的-repository"><a href="#在启动类上添加-enablejparepositories-标明使用自定义的-repository" class="header-anchor">#</a> 在启动类上添加 @EnableJpaRepositories 标明使用自定义的 Repository</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>@EnableJpaRepositories(repositoryBaseClass = BaseRepoImpl.class)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="例子2-1-扩展-定义公有-service-实现简单的crud"><a href="#例子2-1-扩展-定义公有-service-实现简单的crud" class="header-anchor">#</a> 例子2.1（扩展）：定义公有 Service 实现简单的CRUD</h3> <h4 id="公有接口-basecrudservice"><a href="#公有接口-basecrudservice" class="header-anchor">#</a> 公有接口 BaseCrudService</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>public interface BaseCrudService&lt;ENTITY, ID&gt; {
+
+    List&lt;ENTITY&gt; listAll();
+
+    Optional&lt;ENTITY&gt; get(ID id);
+
+    @Transactional(rollbackFor = Exception.class)
+    ENTITY create(ENTITY entity);
+
+    @Transactional(rollbackFor = Exception.class)
+    ENTITY update(ENTITY entity);
+
+    @Transactional(rollbackFor = Exception.class)
+    ENTITY remove(ID id);
+
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h4 id="abstractcrudservice-抽象类实现-basecrudservice"><a href="#abstractcrudservice-抽象类实现-basecrudservice" class="header-anchor">#</a> AbstractCrudService 抽象类实现 BaseCrudService</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>public abstract class AbstractCrudService&lt;ENTITY, ID&gt; implements BaseCrudService&lt;ENTITY, ID&gt; {
+
+    private final BaseRepo&lt;ENTITY, ID&gt; repo;
+
+    protected AbstractCrudService(BaseRepo&lt;ENTITY, ID&gt; repo) {
+        this.repo = repo;
+    }
+
+    @Override
+    public List&lt;ENTITY&gt; listAll() {
+        return repo.findAll();
+    }
+
+    @Override
+    public Optional&lt;ENTITY&gt; get(ID id) {
+        return repo.findById(id);
+    }
+
+    @Override
+    public ENTITY create(ENTITY entity) {
+        return repo.save(entity);
+    }
+
+    @Override
+    public ENTITY update(ENTITY entity) {
+        return repo.saveAndFlush(entity);
+    }
+
+    @Override
+    public ENTITY remove(ID id) {
+        ENTITY entity = get(id).orElse(null);
+        repo.deleteById(id);
+        return entity;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><h4 id="简单使用-userservice-和-userserviceimpl"><a href="#简单使用-userservice-和-userserviceimpl" class="header-anchor">#</a> 简单使用 UserService 和 UserServiceImpl</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>public interface UserService extends BaseCrudService&lt;UserEntity, Long&gt; {
+}
+
+
+@Service
+public class UserServiceImpl extends AbstractCrudService&lt;UserEntity, Long&gt; implements UserService {
+
+
+    private final UserRepo userRepo;
+
+    protected UserServiceImpl(UserRepo userRepo) {
+        super(userRepo);
+        this.userRepo = userRepo;
+    }
+
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/note/redis/redis持久化.html" class="prev">
+        Redis 持久化
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.794e771c.js" defer></script><script src="/blog/assets/js/2.727ab465.js" defer></script><script src="/blog/assets/js/18.6838d0e5.js" defer></script>
+  </body>
+</html>
